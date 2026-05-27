@@ -591,29 +591,69 @@
     document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 50);
   });
 
-  // Load data
-  fetch('./data.json')
-    .then(r => r.json())
-    .then(data => {
-      const p = data.photographer;
-      document.title = `${p.name} — Portafolio Fotográfico`;
-      document.getElementById('hero-name').innerHTML = p.name.replace(/ /, '<br><em>') + '</em>';
-      document.getElementById('hero-bio').textContent = p.bio;
-      document.getElementById('hero-ig').href = p.instagram;
-      document.getElementById('hero-email').href = `mailto:${p.email}`;
-      document.getElementById('footer-name').textContent = p.name;
-      document.getElementById('footer-ig').href = p.instagram;
-      document.getElementById('footer-email').href = `mailto:${p.email}`;
-      document.getElementById('footer-copy').textContent = `© ${new Date().getFullYear()} ${p.name}`;
+  // Data inline
+  const PORTFOLIO_DATA = {
+    "photographer": {
+      "name": "Andrés Tuberquia",
+      "tagline": "Fotografía de conciertos & retrato",
+      "bio": "Cobertura fotográfica de música en vivo y sesiones de retrato en Medellín, Colombia.",
+      "instagram": "https://instagram.com/andres_tuberquia_photos",
+      "email": "contacto@tudominio.com"
+    },
+    "sessions": [
+      {
+        "id": "001",
+        "date": "2026-04-01",
+        "type": "retrato",
+        "title": "Cuerpo",
+        "description": "El cuerpo no se rebela: se construye. Fragmentos, repeticiones y silencios definen una presencia que no pide permiso.",
+        "credits": [
+          { "rol": "Modelo", "nombre": "Mixi Posso" },
+          { "rol": "Locación", "nombre": "Bello, Antioquia" }
+        ],
+        "photos": [
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/0608-01_gc83li.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/0599-03_fvfoqn.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/0600-02_i9tyfc.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/590344-01_maogku.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858666/0603-01_p5t04l.jpg"
+        ]
+      },
+      {
+        "id": "002",
+        "date": "2025-11-01",
+        "type": "concierto",
+        "title": "Los Árboles — Altavoz",
+        "description": "Cobertura fotográfica de Los Árboles en el festival Altavoz. Energía cruda y luces dramáticas en el Estadio Cincuentenario.",
+        "credits": [
+          { "rol": "Banda", "nombre": "Los Árboles" },
+          { "rol": "Festival", "nombre": "Altavoz" },
+          { "rol": "Venue", "nombre": "Estadio Cincuentenario, Medellín" }
+        ],
+        "photos": [
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_1_rjrdtb.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858655/los_arboles_2_rdiopi.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_3_okz2y8.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_4_zfz14j.jpg",
+          "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_5_pxsfe8.jpg"
+        ]
+      }
+    ]
+  };
 
-      // Sort by date, newest first
-      allSessions = data.sessions.sort((a, b) => new Date(b.date) - new Date(a.date));
-      renderSessions(allSessions);
-    })
-    .catch(() => {
-      document.getElementById('sessions-container').innerHTML =
-        '<div class="empty-state">Error al cargar las sesiones. Verifica que data.json esté en la misma carpeta.</div>';
-    });
+  const data = PORTFOLIO_DATA;
+  const p = data.photographer;
+  document.title = `${p.name} — Portafolio Fotográfico`;
+  document.getElementById('hero-name').innerHTML = p.name.replace(/ /, '<br><em>') + '</em>';
+  document.getElementById('hero-bio').textContent = p.bio;
+  document.getElementById('hero-ig').href = p.instagram;
+  document.getElementById('hero-email').href = `mailto:${p.email}`;
+  document.getElementById('footer-name').textContent = p.name;
+  document.getElementById('footer-ig').href = p.instagram;
+  document.getElementById('footer-email').href = `mailto:${p.email}`;
+  document.getElementById('footer-copy').textContent = `© ${new Date().getFullYear()} ${p.name}`;
+  allSessions = data.sessions.sort((a, b) => new Date(b.date) - new Date(a.date));
+  renderSessions(allSessions);
 </script>
 </body>
 </html>
