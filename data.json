@@ -3,7 +3,7 @@
     "name": "Andrés Tuberquia",
     "tagline": "Fotografía de conciertos & retrato",
     "bio": "Cobertura fotográfica de música en vivo y sesiones de retrato en Medellín, Colombia.",
-    "instagram": "https://instagram.com/tuusuario",
+    "instagram": "https://instagram.com/andres_tuberquia_photos",
     "email": "contacto@tudominio.com"
   },
   "sessions": [
@@ -18,11 +18,11 @@
         { "rol": "Locación", "nombre": "Bello, Antioquia" }
       ],
       "photos": [
-        "./fotos/2026-04-retrato-mixxi/0599-03.jpg",
-        "./fotos/2026-04-retrato-mixxi/0600-02.jpg",
-        "./fotos/2026-04-retrato-mixxi/0603-01.jpg",
-        "./fotos/2026-04-retrato-mixxi/0608-01.jpg",
-        "./fotos/2026-04-retrato-mixxi/590344-01.jpg"
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/0608-01_gc83li.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/0599-03_fvfoqn.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/0600-02_i9tyfc.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858667/590344-01_maogku.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858666/0603-01_p5t04l.jpg"
       ]
     },
     {
@@ -37,11 +37,11 @@
         { "rol": "Venue", "nombre": "Estadio Cincuentenario, Medellín" }
       ],
       "photos": [
-        "./fotos/2025-11--live-los-arboles/los_arboles_1.jpg",
-        "./fotos/2025-11--live-los-arboles/los_arboles_2.jpg",
-        "./fotos/2025-11--live-los-arboles/los_arboles_3.jpg",
-        "./fotos/2025-11--live-los-arboles/los_arboles_4.jpg",
-        "./fotos/2025-11--live-los-arboles/los_arboles_5.jpg"
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_1_rjrdtb.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858655/los_arboles_2_rdiopi.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_3_okz2y8.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_4_zfz14j.jpg",
+        "https://res.cloudinary.com/dwfrxjqbu/image/upload/v1779858651/los_arboles_5_pxsfe8.jpg"
       ]
     }
   ]
