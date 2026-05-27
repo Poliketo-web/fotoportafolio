@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio Fotográfico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface2: #1c1c1c;
+      --border: #2a2a2a;
+      --text: #e8e4de;
+      --text-muted: #6b6560;
+      --text-dim: #3d3a36;
+      --accent: #c8b89a;
+      --accent-glow: rgba(200, 184, 154, 0.08);
+      --tag-concert: #1a1208;
+      --tag-concert-text: #c8a96e;
+      --tag-portrait: #0f1a14;
+      --tag-portrait-text: #7ab89a;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    header.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom-color: var(--border);
+    }
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); font-style: italic; }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* FILTER TABS */
+    .filter-bar {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+    .filter-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-right: 1px solid var(--border);
+    }
+    .filter-btn:last-child { border-right: none; }
+    .filter-btn:hover { color: var(--text); background: var(--surface); }
+    .filter-btn.active { color: var(--accent); background: var(--surface); }
+
+    /* HERO */
+    .hero {
+      padding: 14rem 3rem 5rem;
+      max-width: 700px;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-bio {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+    .hero-contact {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.65rem 1.6rem;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+
+    /* DIVIDER */
+    .section-divider {
+      padding: 0 3rem;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .section-divider span {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-divider::before { display: none; }
+
+    /* SESSIONS */
+    .sessions {
+      padding: 0 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .session-block {
+      margin-bottom: 5rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .session-block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .session-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .session-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .session-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .session-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 1px;
+      font-weight: 500;
+    }
+    .session-tag.concierto {
+      background: var(--tag-concert);
+      color: var(--tag-concert-text);
+    }
+    .session-tag.retrato {
+      background: var(--tag-portrait);
+      color: var(--tag-portrait-text);
+    }
+    .session-title {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .session-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      max-width: 600px;
+    }
+    .session-credits {
+      text-align: right;
+    }
+    .credits-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+    }
+    .credit-item {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .credit-item strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* PHOTO GRID — MASONRY */
+    .photo-grid {
+      columns: 3;
+      column-gap: 6px;
+    }
+    @media (max-width: 900px) { .photo-grid { columns: 2; } }
+    @media (max-width: 600px) { .photo-grid { columns: 1; } }
+
+    .photo-item {
+      break-inside: avoid;
+      margin-bottom: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .photo-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s ease, filter 0.3s ease;
+      filter: brightness(0.92);
+    }
+    .photo-item:hover img {
+      transform: scale(1.03);
+      filter: brightness(1);
+    }
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-overlay svg {
+      opacity: 0;
+      transition: opacity 0.3s;
+      stroke: white;
+    }
+    .photo-item:hover .photo-overlay { background: rgba(0,0,0,0.2); }
+    .photo-item:hover .photo-overlay svg { opacity: 1; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 40px; height: 40px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover { color: var(--text); border-color: var(--text-muted); }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 44px; height: 44px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .lightbox-nav:hover { color: var(--text); border-color: var(--text-muted); }
+    .lightbox-nav.prev { left: 1.5rem; }
+    .lightbox-nav.next { right: 1.5rem; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 6rem;
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--accent);
+      font-style: italic;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* EMPTY STATE */
+    .empty-state {
+      padding: 4rem 3rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<header id="site-header">
+  <a href="#" class="logo">foto<span>folio</span></a>
+  <nav>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="concierto">Conciertos</button>
+      <button class="filter-btn" data-filter="retrato">Retratos</button>
+    </div>
+    <a href="#contacto" class="btn-ghost">Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="hero-eyebrow">Portafolio fotográfico</div>
+    <h1 class="hero-title" id="hero-name">Cargando…</h1>
+    <p class="hero-bio" id="hero-bio"></p>
+    <div class="hero-contact">
+      <a href="#" id="hero-ig" class="btn-primary" target="_blank">Instagram</a>
+      <a href="#" id="hero-email" class="btn-ghost" id="contacto">Solicitar credencial</a>
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <span>Sesiones fotográficas</span>
+  </div>
+
+  <section class="sessions" id="sessions-container">
+    <div class="empty-state">Cargando sesiones…</div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-name" id="footer-name"></div>
+  <div class="footer-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#" id="footer-ig">Instagram</a>
+    <a href="#" id="footer-email">Contacto</a>
+  </div>
+  <div class="footer-copy" id="footer-copy"></div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lb-close" aria-label="Cerrar">✕</button>
+  <button class="lightbox-nav prev" id="lb-prev" aria-label="Anterior">←</button>
+  <img id="lb-img" src="" alt="" />
+  <button class="lightbox-nav next" id="lb-next" aria-label="Siguiente">→</button>
+  <div class="lightbox-counter" id="lb-counter"></div>
+</div>
+
+<script>
+  let allSessions = [];
+  let activeFilter = 'all';
+  let lbPhotos = [];
+  let lbIndex = 0;
+
+  function formatDate(dateStr) {
+    const [y, m, d] = dateStr.split('-');
+    const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
+  }
+
+  function renderSessions(sessions) {
+    const container = document.getElementById('sessions-container');
+    const filtered = activeFilter === 'all'
+      ? sessions
+      : sessions.filter(s => s.type === activeFilter);
+
+    if (!filtered.length) {
+      container.innerHTML = '<div class="empty-state">No hay sesiones en esta categoría</div>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(session => `
+      <article class="session-block" data-id="${session.id}">
+        <div class="session-header">
+          <div>
+            <div class="session-meta">
+              <span class="session-date">${formatDate(session.date)}</span>
+              <span class="session-tag ${session.type}">${session.type === 'concierto' ? 'Concierto' : 'Retrato'}</span>
+            </div>
+            <h2 class="session-title">${session.title}</h2>
+            <p class="session-desc">${session.description}</p>
+          </div>
+          <div class="session-credits">
+            <div class="credits-label">Créditos</div>
+            ${session.credits.map(c => `
+              <div class="credit-item">${c.rol} — <strong>${c.nombre}</strong></div>
+            `).join('')}
+          </div>
+        </div>
+        <div class="photo-grid">
+          ${session.photos.map((photo, i) => `
+            <div class="photo-item" data-session="${session.id}" data-index="${i}">
+              <img src="${photo}" alt="${session.title} — foto ${i+1}" loading="lazy" />
+              <div class="photo-overlay">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </article>
+    `).join('');
+
+    // Observe for animation
+    const blocks = container.querySelectorAll('.session-block');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    blocks.forEach(b => observer.observe(b));
+
+    // Photo click → lightbox
+    container.querySelectorAll('.photo-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const sid = item.dataset.session;
+        const idx = parseInt(item.dataset.index);
+        const session = sessions.find(s => s.id === sid);
+        openLightbox(session.photos, idx);
+      });
+    });
+  }
+
+  // Lightbox
+  function openLightbox(photos, index) {
+    lbPhotos = photos;
+    lbIndex = index;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function updateLightbox() {
+    document.getElementById('lb-img').src = lbPhotos[lbIndex];
+    document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${lbPhotos.length}`;
+  }
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLightbox(); });
+  document.getElementById('lb-prev').addEventListener('click', () => { lbIndex = (lbIndex - 1 + lbPhotos.length) % lbPhotos.length; updateLightbox(); });
+  document.getElementById('lb-next').addEventListener('click', () => { lbIndex = (lbIndex + 1) % lbPhotos.length; updateLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbPhotos.length) % lbPhotos.length; updateLightbox(); }
+    if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbPhotos.length; updateLightbox(); }
+  });
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderSessions(allSessions);
+    });
+  });
+
+  // Sticky header
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Load data
+  fetch('./data.json')
+    .then(r => r.json())
+    .then(data => {
+      const p = data.photographer;
+      document.title = `${p.name} — Portafolio Fotográfico`;
+      document.getElementById('hero-name').innerHTML = p.name.replace(/ /, '<br><em>') + '</em>';
+      document.getElementById('hero-bio').textContent = p.bio;
+      document.getElementById('hero-ig').href = p.instagram;
+      document.getElementById('hero-email').href = `mailto:${p.email}`;
+      document.getElementById('footer-name').textContent = p.name;
+      document.getElementById('footer-ig').href = p.instagram;
+      document.getElementById('footer-email').href = `mailto:${p.email}`;
+      document.getElementById('footer-copy').textContent = `© ${new Date().getFullYear()} ${p.name}`;
+
+      // Sort by date, newest first
+      allSessions = data.sessions.sort((a, b) => new Date(b.date) - new Date(a.date));
+      renderSessions(allSessions);
+    })
+    .catch(() => {
+      document.getElementById('sessions-container').innerHTML =
+        '<div class="empty-state">Error al cargar las sesiones. Verifica que data.json esté en la misma carpeta.</div>';
+    });
+</script>
+</body>
+</html>

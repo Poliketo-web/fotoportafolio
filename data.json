@@ -1,0 +1,48 @@
+{
+  "photographer": {
+    "name": "Andrés Tuberquia",
+    "tagline": "Fotografía de conciertos & retrato",
+    "bio": "Cobertura fotográfica de música en vivo y sesiones de retrato en Medellín, Colombia.",
+    "instagram": "https://instagram.com/tuusuario",
+    "email": "contacto@tudominio.com"
+  },
+  "sessions": [
+    {
+      "id": "001",
+      "date": "2026-04-01",
+      "type": "retrato",
+      "title": "Cuerpo",
+      "description": "El cuerpo no se rebela: se construye. Fragmentos, repeticiones y silencios definen una presencia que no pide permiso.",
+      "credits": [
+        { "rol": "Modelo", "nombre": "Mixi Posso" },
+        { "rol": "Locación", "nombre": "Bello, Antioquia" }
+      ],
+      "photos": [
+        "./fotos/2026-04-retrato-mixxi/0599-03.jpg",
+        "./fotos/2026-04-retrato-mixxi/0600-02.jpg",
+        "./fotos/2026-04-retrato-mixxi/0603-01.jpg",
+        "./fotos/2026-04-retrato-mixxi/0608-01.jpg",
+        "./fotos/2026-04-retrato-mixxi/590344-01.jpg"
+      ]
+    },
+    {
+      "id": "002",
+      "date": "2025-11-01",
+      "type": "concierto",
+      "title": "Los Árboles — Altavoz",
+      "description": "Cobertura fotográfica de Los Árboles en el festival Altavoz. Energía cruda y luces dramáticas en el Estadio Cincuentenario.",
+      "credits": [
+        { "rol": "Banda", "nombre": "Los Árboles" },
+        { "rol": "Festival", "nombre": "Altavoz" },
+        { "rol": "Venue", "nombre": "Estadio Cincuentenario, Medellín" }
+      ],
+      "photos": [
+        "./fotos/2025-11--live-los-arboles/los_arboles_1.jpg",
+        "./fotos/2025-11--live-los-arboles/los_arboles_2.jpg",
+        "./fotos/2025-11--live-los-arboles/los_arboles_3.jpg",
+        "./fotos/2025-11--live-los-arboles/los_arboles_4.jpg",
+        "./fotos/2025-11--live-los-arboles/los_arboles_5.jpg"
+      ]
+    }
+  ]
+}
